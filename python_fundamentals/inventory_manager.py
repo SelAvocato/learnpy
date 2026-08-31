@@ -1,5 +1,5 @@
 class InventoryManager:
-    def __init__(self, products_by_id, products_by_categories, product_last_id):
+    def __init__(self, products_by_id = {}, products_by_categories = {}, product_last_id = 0):
         self.products_by_id = products_by_id
         self.products_by_categories = products_by_categories
         self.product_last_id = product_last_id

@@ -1,4 +1,5 @@
 from inventory_manager import InventoryManager
+from audio_inventory_manager import AudioInventoryManager
 
 products_by_id = {
     1: {"id": 1, "name": "Keyboard", "quantity": 13, "category": "peripherals"},
@@ -6,6 +7,9 @@ products_by_id = {
     3: {"id": 3, "name": "Monitor", "quantity": 25, "category": "display"},
     4: {"id": 4, "name": "USB Flash Drive", "quantity": 120, "category": "storage"},
     5: {"id": 5, "name": "External Hard Drive", "quantity": 15, "category": "storage"},
+    6: {"id": 6, "name": "Earphones", "quantity": 42, "category": "audio"},
+    7: {"id": 7, "name": "Headset", "quantity": 32, "category": "audio"},
+    8: {"id": 8, "name": "Airpods", "quantity": 54, "category": "audio"},
 }
 
 products_by_categories = {
@@ -14,7 +18,7 @@ products_by_categories = {
     "storage": [products_by_id[4], products_by_id[5]],
 }
 
-product_last_id = 5
+product_last_id = 8
 
 inventory = InventoryManager(products_by_id, products_by_categories, product_last_id)
 
@@ -41,6 +45,28 @@ for product in inventory.get_low_stock_products(20):
 
 print(inventory.get_categories())
 
+audio_products_by_id = {
+    6: {"id": 6, "name": "Earphones", "quantity": 42, "category": "audio"},
+    7: {"id": 7, "name": "Headset", "quantity": 32, "category": "audio"},
+    8: {"id": 8, "name": "Airpods", "quantity": 54, "category": "audio"},
+}
+
+audio_product_last_id = 8
+
+products_by_tag = {
+    "wireless": [audio_products_by_id[8]],
+    "wired": [audio_products_by_id[6], audio_products_by_id[7]],
+    "apple": [audio_products_by_id[8]],
+}
+
+audio_inventory = AudioInventoryManager(
+    audio_products_by_id, audio_product_last_id, products_by_tag
+)
+
+for product in audio_inventory.get_wireless():
+    print(
+        f"#{product.get("id")} | {product.get('name')} | {product.get('quantity')} units | {product.get('category')}"
+    )
 
 # products_by_id = [
 #     {"id": 1, "name": "Keyboard", "quantity": 13, "category": "Peripherals"},
